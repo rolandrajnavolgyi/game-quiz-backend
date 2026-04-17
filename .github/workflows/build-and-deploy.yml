@@ -9,8 +9,8 @@ env:
   AZURE_WEBAPP_NAME: game-quiz-webapi
   AZURE_WEBAPP_PACKAGE_PATH: "./src/GameQuiz.WebAPI/publish"
   DOTNET_VERSION: "10.x"
-  SOLUTION_PATH: "./src/Backend.slnx"
-  API_PROJECT_PATH: "GameQuiz.WebAPI"
+  SOLUTION_PATH: "src/Backend.slnx"
+  API_PROJECT_PATH: "src/GameQuiz.WebAPI"
   PUBLISH_DIR: "./publish"
 
 jobs:
