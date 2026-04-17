@@ -9,8 +9,8 @@ env:
   AZURE_WEBAPP_NAME: game-quiz-webapi
   AZURE_WEBAPP_PACKAGE_PATH: "./src/GameQuiz.WebAPI/publish"
   DOTNET_VERSION: "10.x"
-  SOLUTION_PATH: "src/Backend.slnx"
-  API_PROJECT_PATH: "src/GameQuiz.WebAPI"
+  SOLUTION_PATH: "./src/Backend.slnx"
+  API_PROJECT_PATH: "./src/GameQuiz.WebAPI"
   PUBLISH_DIR: "./publish"
 
 jobs:
@@ -28,16 +28,16 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
         
       - name: Restore
-        run: dotnet restore $ {{ env.SOLUTION_PATH }}
+        run: dotnet restore ${{ env.SOLUTION_PATH }}
 
       - name: Build
-        run: dotnet build $ {{ env.SOLUTION_PATH }} --configuration Release --no-restore
+        run: dotnet build ${{ env.SOLUTION_PATH }} --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test $ {{ env.SOLUTION_PATH }} --configuration Release --no-restore --no-build --verbosity normal
+        run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-restore --no-build --verbosity normal
 
       - name: Publish
-        run: dotnet publish $ {{ env.API_PROJECT_PATH }} --configuration Release --no-restore --no-build --property:PublishDir=${{ env.PUBLISH_DIR }}
+        run: dotnet publish ${{ env.API_PROJECT_PATH }} --configuration Release --no-restore --no-build --property:PublishDir=${{ env.PUBLISH_DIR }}
 
       - name: Publish Artifacts
         uses: actions/upload-artifact@v7.0.1
@@ -60,6 +60,6 @@ jobs:
       - name: Deploy
         uses: azure/webapps-deploy@v2
         with:
-          app-name: $ {{ env.AZURE_WEBAPP_NAME }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
