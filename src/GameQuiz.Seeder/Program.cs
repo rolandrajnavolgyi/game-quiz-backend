@@ -21,7 +21,13 @@ try
     logger.LogInformation("Starting database seeding...");
 
     var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-        .UseSqlServer(Environment.GetEnvironmentVariable("ConnectionStrings__GameQuizDB"))
+        .UseSqlServer(Environment.GetEnvironmentVariable("ConnectionStrings__GameQuizDB"), sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null);
+        })
         .Options;
 
     using var context = new ApplicationDbContext(options);
@@ -30,7 +36,7 @@ try
     {
         logger.LogInformation("No games found. Seeding data...");
 
-        var json = await File.ReadAllTextAsync("game_awards_nominees.json");
+        var json = await File.ReadAllTextAsync(Path.Combine(AppContext.BaseDirectory, "game_awards_nominees.json"));
         var gameNames = JsonSerializer.Deserialize<string[]>(json);
         var games = gameNames?
             .Distinct()
