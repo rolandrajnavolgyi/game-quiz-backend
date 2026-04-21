@@ -416,3 +416,6 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Visual Studio 2022 auto-generated file for storing launch profiles
+**/Properties/launchSettings.json
