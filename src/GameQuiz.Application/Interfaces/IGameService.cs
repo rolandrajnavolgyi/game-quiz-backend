@@ -7,5 +7,5 @@ namespace GameQuiz.Application.Interfaces;
 
 public interface IGameService
 {
-    Task<IEnumerable<GameDTO>> GetAllAsync();
+    Task<IEnumerable<GameDTO>> GetAllAsync(CancellationToken cancellationToken);
 }
