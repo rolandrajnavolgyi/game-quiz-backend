@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GameQuiz.WebApi;
+namespace GameQuiz.WebApi.Exceptions;
 
 public class GlobalExceptionHandler(IProblemDetailsService problemDetailsService,
     ILogger<GlobalExceptionHandler> logger) : IExceptionHandler

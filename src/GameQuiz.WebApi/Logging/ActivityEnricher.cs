@@ -2,7 +2,7 @@
 using Serilog.Events;
 using System.Diagnostics;
 
-namespace GameQuiz.WebApi;
+namespace GameQuiz.WebApi.Logging;
 
 public class ActivityEnricher : ILogEventEnricher
 {
