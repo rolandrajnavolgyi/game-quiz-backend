@@ -1,7 +1,7 @@
 ﻿using GameQuiz.Application.DTOs;
 using GameQuiz.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Serilog.Context;
+using Microsoft.Extensions.Caching.Hybrid;
 
 namespace GameQuiz.WebApi.Controllers;
 
@@ -10,30 +10,22 @@ namespace GameQuiz.WebApi.Controllers;
 public class GameController : ControllerBase
 {
     private readonly IGameService _gameService;
-    private readonly ILogger<GameController> _logger;
+    private readonly HybridCache _cache;
 
-    public GameController(IGameService gameService, ILogger<GameController> logger)
+    public GameController(IGameService gameService, HybridCache cache)
     {
         _gameService = gameService;
-        _logger = logger;
+        _cache = cache;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<GameDTO>>> GetAll()
+    public async Task<ActionResult<IEnumerable<GameDTO>>> GetAll(CancellationToken cancellationToken)
     {
-        using (LogContext.PushProperty("User", "me"))
-        {
-            _logger.LogWarning("Method called at {Path}", Request.Path);
-        }
-        var products = await _gameService.GetAllAsync();
-        return Ok(products);
-    }
+        var cachedProducts = await _cache.GetOrCreateAsync("games", async token =>
+        { 
+            return await _gameService.GetAllAsync(token);
+        }, cancellationToken: cancellationToken);
 
-    [HttpGet]
-    [Route("error")]
-    public async Task<IActionResult> TriggerError()
-    {
-        throw new NotImplementedException();
+        return cachedProducts is null ? NotFound() : Ok(cachedProducts);
     }
-
 }

@@ -14,8 +14,8 @@ public class GameRepository : IGameRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Game>> GetAllAsync()
+    public async Task<IEnumerable<Game>> GetAllAsync(CancellationToken cancellationToken)
     {
-        return await _context.Games.ToListAsync();
+        return await _context.Games.ToListAsync(cancellationToken);
     }
 }

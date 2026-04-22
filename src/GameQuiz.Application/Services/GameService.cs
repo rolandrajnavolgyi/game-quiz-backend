@@ -13,9 +13,9 @@ public class GameService : IGameService
         _gameRepository = gameRepository;
     }
 
-    public async Task<IEnumerable<GameDTO>> GetAllAsync()
+    public async Task<IEnumerable<GameDTO>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var games = await _gameRepository.GetAllAsync();
+        var games = await _gameRepository.GetAllAsync(cancellationToken);
         return games.Select(g => new GameDTO(g.Id, g.Name));
     }
 }

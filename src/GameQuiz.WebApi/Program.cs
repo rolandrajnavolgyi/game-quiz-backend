@@ -6,6 +6,7 @@ using GameQuiz.Infrastructure.Repositories;
 using GameQuiz.WebApi;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Hybrid;
 using Serilog;
 using System.Diagnostics;
 
@@ -55,6 +56,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IGameService, GameService>();
+
+builder.Services.AddHybridCache(options => 
+    options.DefaultEntryOptions = new HybridCacheEntryOptions 
+    { 
+        LocalCacheExpiration = TimeSpan.FromMinutes(5) 
+    });
 
 var app = builder.Build();
 
