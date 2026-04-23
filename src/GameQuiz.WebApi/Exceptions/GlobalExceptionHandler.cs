@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GameQuiz.WebApi.Exceptions;
 
-public class GlobalExceptionHandler(IProblemDetailsService problemDetailsService,
+internal class GlobalExceptionHandler(IProblemDetailsService problemDetailsService,
     ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(

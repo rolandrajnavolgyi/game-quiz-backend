@@ -10,8 +10,5 @@ internal abstract class EntityConfiguration<TEntity> : IEntityTypeConfiguration<
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
         builder.HasKey(e => e.Id);
-
-        builder.Property(e => e.Created)
-            .HasDefaultValueSql("GETUTCDATE()");
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Caching.Hybrid;
 
 namespace GameQuiz.WebApi.Features.Games;
 
-public static class GameOperations
+internal static class GameOperations
 {
     public static async Task<Results<Ok<IEnumerable<GameDTO>>, NotFound>> GetAllGames(IGameService gameService, 
         HybridCache cache, CancellationToken cancellationToken)

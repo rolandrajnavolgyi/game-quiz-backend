@@ -1,6 +1,6 @@
 ﻿namespace GameQuiz.WebApi.Features.Games;
 
-public static class GameEndpoints
+internal static class GameEndpoints
 {
     public static IEndpointRouteBuilder MapGameEndpoints(this IEndpointRouteBuilder app)
     {

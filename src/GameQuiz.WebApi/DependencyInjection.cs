@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace GameQuiz.WebApi;
 
-public static class DependencyInjection
+internal static class DependencyInjection
 {
     public static IServiceCollection AddApi(this WebApplicationBuilder builder)
     {
