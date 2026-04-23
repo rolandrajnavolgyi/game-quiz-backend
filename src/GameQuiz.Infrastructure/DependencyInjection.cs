@@ -1,6 +1,8 @@
-﻿using GameQuiz.Domain.Interfaces;
+﻿using GameQuiz.Application.Interfaces;
+using GameQuiz.Domain.Interfaces;
 using GameQuiz.Infrastructure.Data;
 using GameQuiz.Infrastructure.Repositories;
+using GameQuiz.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +13,16 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
        => services
+           .AddServices()
            .AddRepositories()
            .AddSqlServer(configuration);
+
+    private static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services.AddHttpContextAccessor();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+        return services;
+    }
 
     private static IServiceCollection AddRepositories(this IServiceCollection services)
         => services
@@ -20,6 +30,7 @@ public static class DependencyInjection
 
     private static IServiceCollection AddSqlServer(this IServiceCollection services, IConfiguration configuration)
         => services
+            .AddSingleton(TimeProvider.System)
             .AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("GameQuizDB"), sqlOptions =>
                 {

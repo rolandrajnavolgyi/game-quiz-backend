@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="GameQuiz.UseCases.Tests/GameQuiz.UseCases.Tests.csproj" Id="679ddab0-b946-43eb-941c-c54ce9464283" />
   <Project Path="GameQuiz.Application/GameQuiz.Application.csproj" Id="7f4a41c2-4db6-424b-9ba7-e5e8b297009e" />
   <Project Path="GameQuiz.Domain/GameQuiz.Domain.csproj" Id="2ca23e56-4447-4330-ad5e-9795fad4d46e" />
   <Project Path="GameQuiz.Infrastructure/GameQuiz.Infrastructure.csproj" Id="ef016193-f48d-4f9c-8c18-9bf4c3d00c81" />

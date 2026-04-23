@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GameQuiz.Domain.Interfaces;
 
 namespace GameQuiz.Domain.Entities;
 
-public abstract class Entity
+public abstract class Entity: IAuditable
 {
-    public int Id { get; set; }
-    public DateTime Created { get; set; }
+    public int Id { get; protected set; }
+    public DateTime CreatedAtUtc { get; protected set; }
+    public string? CreatedBy { get; protected set; }
 }

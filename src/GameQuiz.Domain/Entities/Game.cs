@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameQuiz.Domain.Entities;
+﻿namespace GameQuiz.Domain.Entities;
 
 public class Game : Entity
 {

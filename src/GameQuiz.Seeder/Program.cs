@@ -1,5 +1,6 @@
 ﻿using GameQuiz.Domain.Entities;
 using GameQuiz.Infrastructure.Data;
+using GameQuiz.Seeder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
@@ -30,7 +31,7 @@ try
         })
         .Options;
 
-    using var context = new ApplicationDbContext(options);
+    using var context = new ApplicationDbContext(options, new SeederUserService(), TimeProvider.System);
 
     if (!await context.Games.AnyAsync())
     {
