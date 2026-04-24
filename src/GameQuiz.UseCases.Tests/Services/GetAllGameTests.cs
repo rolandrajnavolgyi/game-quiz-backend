@@ -5,20 +5,20 @@ using GameQuiz.Infrastructure.Repositories;
 
 namespace GameQuiz.UseCases.Tests.Services;
 
-public class ListGameTests
+public class GetAllGameTests
 {
     [Fact]
     public async Task Should_ReturnEmptyList_WhenNoGamesExist()
     {
         // Arrange
         using var context = new TestDbContextFactory().CreateDbContext();
-        using var cts = new CancellationTokenSource();
+        var ct = TestContext.Current.CancellationToken;
 
         var repo = new GameRepository(context);
         var service = new GameService(repo);
 
         // Act
-        var result = await service.GetAllAsync(cts.Token);
+        var result = await service.GetAllAsync(ct);
 
         // Assert
         result.Should().BeEmpty();
@@ -29,19 +29,19 @@ public class ListGameTests
     {
         // Arrange
         using var context = new TestDbContextFactory().CreateDbContext();
-        using var cts = new CancellationTokenSource();
-        
+        var ct = TestContext.Current.CancellationToken;
+
         var gameOne = new Game { Name = "One" };
         var gameTwo = new Game { Name = "Two" };
 
         context.Games.AddRange([gameOne, gameTwo]);
-        await context.SaveChangesAsync();
+        await context.SaveChangesAsync(ct);
 
         var repo = new GameRepository(context);
         var service = new GameService(repo);
 
         // Act
-        var result = await service.GetAllAsync(cts.Token);
+        var result = await service.GetAllAsync(ct);
 
         // Assert
         result.Should().SatisfyRespectively(

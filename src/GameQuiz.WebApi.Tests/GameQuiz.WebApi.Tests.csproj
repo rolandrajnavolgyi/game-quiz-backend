@@ -7,12 +7,17 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <PropertyGroup>
+	<PreserveCompilationContext>true</PreserveCompilationContext>
+  </PropertyGroup>	
+	
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="10.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="FluentAssertions" Version="8.9.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.7" />
     <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" Version="10.5.0" />
@@ -25,7 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\GameQuiz.Infrastructure\GameQuiz.Infrastructure.csproj" />
+    <ProjectReference Include="..\GameQuiz.Infrastructure\GameQuiz.Infrastructure.csproj" />
+    <ProjectReference Include="..\GameQuiz.WebApi\GameQuiz.WebApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

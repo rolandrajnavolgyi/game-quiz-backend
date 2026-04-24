@@ -1,8 +1,9 @@
 <Solution>
-  <Project Path="GameQuiz.UseCases.Tests/GameQuiz.UseCases.Tests.csproj" Id="679ddab0-b946-43eb-941c-c54ce9464283" />
   <Project Path="GameQuiz.Application/GameQuiz.Application.csproj" Id="7f4a41c2-4db6-424b-9ba7-e5e8b297009e" />
   <Project Path="GameQuiz.Domain/GameQuiz.Domain.csproj" Id="2ca23e56-4447-4330-ad5e-9795fad4d46e" />
   <Project Path="GameQuiz.Infrastructure/GameQuiz.Infrastructure.csproj" Id="ef016193-f48d-4f9c-8c18-9bf4c3d00c81" />
   <Project Path="GameQuiz.Seeder/GameQuiz.Seeder.csproj" Id="c3f4644e-26ea-4f22-99ed-398d12978e94" />
+  <Project Path="GameQuiz.UseCases.Tests/GameQuiz.UseCases.Tests.csproj" Id="679ddab0-b946-43eb-941c-c54ce9464283" />
+  <Project Path="GameQuiz.WebApi.Tests/GameQuiz.WebApi.Tests.csproj" Id="598966e7-5eee-4a05-8315-b763440c2486" />
   <Project Path="GameQuiz.WebApi\GameQuiz.WebApi.csproj" />
 </Solution>
