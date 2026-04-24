@@ -7,7 +7,7 @@ namespace GameQuiz.WebApi.Features.Games;
 
 internal static class GameOperations
 {
-    public static async Task<Results<Ok<IEnumerable<GameDTO>>, NotFound>> GetAllGames(IGameService gameService, 
+    public static async Task<Ok<IEnumerable<GameDTO>>> GetAllGames(IGameService gameService, 
         HybridCache cache, CancellationToken cancellationToken)
     {
         var cachedGames = await cache.GetOrCreateAsync("games", async token =>
@@ -15,6 +15,6 @@ internal static class GameOperations
             return await gameService.GetAllAsync(token);
         }, cancellationToken: cancellationToken);
 
-        return cachedGames is null ? TypedResults.NotFound() : TypedResults.Ok(cachedGames);
+        return TypedResults.Ok(cachedGames);
     }
 }

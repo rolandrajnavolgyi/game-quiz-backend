@@ -15,16 +15,16 @@ public class AuditableTests
         var timeProvider = new FakeTimeProvider();
         timeProvider.SetUtcNow(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
         using var context = new TestDbContextFactory().CreateDbContext(timeProvider);
-        using var cts = new CancellationTokenSource();
+        var ct = TestContext.Current.CancellationToken;
 
         var repo = new GameRepository(context);
         var game = new Game { Name = "The Game" };
         
         context.Games.Add(game);
-        await context.SaveChangesAsync();
+        await context.SaveChangesAsync(ct);
 
         // Act
-        var savedGame = await context.Games.SingleAsync(cts.Token);
+        var savedGame = await context.Games.SingleAsync(ct);
 
         // Assert
         savedGame.Should().NotBeNull();
